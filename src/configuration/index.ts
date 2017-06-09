@@ -18,6 +18,10 @@ class Configuration {
         this.port();
     }
 
+    public console() {
+        console.log(`Web Service started: ${this.PORT}`);
+    }
+
     private environment() {
         this.NODE_ENV = process.env.NODE_ENV || ENV.DEVELOPMENT;
     }
@@ -29,9 +33,6 @@ class Configuration {
             this.PORT = process.env.PORT || PORT.PRODUCTION;
         }
         this.PORT = PORT.DEVELOPMENT;
-    }
-    public console() {
-        console.log(`Web Service started: ${this.PORT}`);
     }
 }
 

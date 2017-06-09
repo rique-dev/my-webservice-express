@@ -1,4 +1,7 @@
 import { Request, Response } from 'express';
+import { Document } from 'mongoose';
+
+export interface IModel extends Document { }
 
 export interface IController {
     list(req: Request, res: Response): void;

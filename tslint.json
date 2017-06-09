@@ -35,8 +35,7 @@
             "check-type"
         ],
         "typedef-whitespace": [
-            true,
-            {
+            true,            {
                 "call-signature": "nospace",
                 "index-signature": "nospace",
                 "parameter": "nospace",
@@ -55,6 +54,40 @@
         "no-trailing-whitespace": true,
         "no-null-keyword": true,
         "prefer-const": true,
-        "jsdoc-format": true
+        "jsdoc-format": true,
+        "no-construct": true,
+        "no-parameter-properties": false,
+        "no-debugger": true,
+        "no-duplicate-variable": true,
+        "no-empty": true,
+        "no-eval": true,
+        "no-string-literal": true,
+        "no-switch-case-fall-through": true,
+        "no-unused-expression": true,
+        "no-use-before-declare": true,
+        "no-var-requires": false,
+        "no-arg": true,
+        "no-bitwise": true,
+        "no-console": [true,
+            "debug",
+            "info",
+            "time",
+            "timeEnd",
+            "trace"
+        ],
+        "ban": [true, ["_", "extend"],
+            ["_", "isNull"],
+            ["_", "isDefined"]
+        ],
+        "curly": true,
+        "eofline": false,
+        "forin": true,
+        "label-position": true,
+        "max-line-length": [false, 140],
+        "member-ordering": [true,
+            "public-before-private",
+            "static-before-instance",
+            "variables-before-functions"
+        ]
     }
 }

@@ -6,16 +6,17 @@ import {
     destroy,
     list
 } from './Controller';
-import Validate from '../../provider/validate';
-import * as Validator from './Validator';
+import Validate from '../../components/validate';
+import * as Validator from './base/Validator';
 
-const router: Router = Router();
-
-router
-    .get('/', list)
-    .get('/:id', Validate(Validator.params), read)
-    .post('/', Validate(Validator.create), create)
-    .put('/:id', Validate(Validator.update), update)
-    .delete('/:id', Validate(Validator.params), destroy);
-
-export default router;
+export default class EntityRouter {
+    static get routers() {
+        const router: Router = Router();
+        router.get('/', list);
+        router.get('/:id', Validate(Validator.params), read);
+        router.post('/', Validate(Validator.create), create);
+        router.put('/:id', Validate(Validator.update), update);
+        router.delete('/:id', Validate(Validator.params), destroy);
+        return router;
+    }
+}

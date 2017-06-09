@@ -1,7 +1,10 @@
 class Provider {
-    static show() {
-        console.log('Show Provider');
+    private message: string;
+    public show() {
+        this.message = 'Provider';
     }
 }
 
-export default Provider;
+export const {
+    show,
+} = new Provider();

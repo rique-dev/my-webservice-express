@@ -1,7 +1,5 @@
 import * as Joi from 'joi';
-// const JoiObjectId = require('joi-objectid');
-import JoiObjectId from '../../util/joi-object-id';
-// const objectId = JoiObjectId(Joi);
+import JoiObjectId from '../../../util/joi-object-id';
 
 export const create = {
     body: Joi.object().keys({

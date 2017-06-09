@@ -1,4 +1,7 @@
 export const RequestTimeout = '5s';
+export class Constants {
+    static TESTE: string = 'Test';
+}
 export enum ENV {
     DEVELOPMENT = <any>'DEVELOPMENT',
     TEST = <any>'TEST',

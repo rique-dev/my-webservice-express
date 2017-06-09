@@ -1,15 +1,15 @@
-import endpoint from './endpoint/Router';
 import CONFIG from './../configuration';
+import Entity from './endpoint/Router';
 import * as Express from 'express';
 
-export class API {
+class API {
     static get routes() {
         const app = Express();
-        app.use(`${CONFIG.API_VERSION}/endpoint`, endpoint);
+
+        app.use(`${CONFIG.API_VERSION}/endpoint`, Entity.routers);
 
         return app;
     }
 }
-export default function (app: Express.Application) {
-    app.use(`${CONFIG.API_VERSION}/endpoint`, endpoint);
-}
+
+export default API;

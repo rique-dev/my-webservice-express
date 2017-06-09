@@ -1,8 +1,8 @@
 import * as Express from 'express';
 import CONFIG from './configuration';
 import { Middleware } from './configuration/middlewares';
-const requestTimeout = require('connect-timeout'); // No Types
-import MongoConnector from './provider/mongoose';
+import requestTimeout from 'connect-timeout'; // No Types
+import MongoConnector from './components/mongoose';
 import API from './api';
 import { RequestTimeout } from './configuration/constant';
 
@@ -18,30 +18,11 @@ class Server {
         this.Middleware();
         this.Init();
     }
+
     // Configure API endpoints.
     private Middleware() {
         this.app.use(Middleware.configuration);
-        this.app
-            .get(CONFIG.API_VERSION, (req: Express.Request, res: Express.Response) => {
-                res.sendFile(`${CONFIG.ROOT}/public/index.html`);
-            });
-
-        // All undefined asset or api routes should return a 404
-        this.app
-            .route('/:url(api|auth|components|app|bower_components|assets)/*')
-            .get((req: Express.Request, res: Express.Response) => {
-                res.sendFile(`${CONFIG.ROOT}/public/404.html`);
-            });
-
-        // All other routes should redirect to the index.html
-        this.app
-            .route('/*')
-            .get((req: Express.Request, res: Express.Response) => {
-                res.sendFile(`${CONFIG.ROOT}/public/404.html`);
-            });
     }
-
-    private WebSocket() { }
 
     private MongoDB() {
         // const url: string = 'mongodb://localhost:27017/';
