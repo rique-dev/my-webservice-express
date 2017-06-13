@@ -5,11 +5,11 @@ import {
     update,
     destroy,
     list
-} from './Controller';
+} from './thing.controller';
 import Validate from '../../components/validate';
-import * as Validator from './base/Validator';
+import * as Validator from './base/thing.validator';
 
-export default class EntityRouter {
+class ThingRouter {
     static get routers() {
         const router: Router = Router();
         router.get('/', list);
@@ -20,3 +20,5 @@ export default class EntityRouter {
         return router;
     }
 }
+
+export default ThingRouter.routers;

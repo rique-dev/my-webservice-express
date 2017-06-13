@@ -38,7 +38,7 @@ export class Middleware {
         app.set('views', path.join(CONFIG.ROOT, 'views'));
         app.set('view engine', 'index');
 
-        app.use(API.routes);
+        app.use(API);
 
         app.use((err: any, req: Express.Request, res: Express.Response, next: Express.NextFunction) => {
             err.status = 404;

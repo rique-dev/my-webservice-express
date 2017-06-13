@@ -10,11 +10,15 @@ export default function Validate(schema: any) {
         if (!schema) {
             return next();
         }
-
-        schema['params'] ? toValidate['params'] = req.params : false;
-        schema['body'] ? toValidate['body'] = req.body : false;
-        schema['query'] ? toValidate['query'] = req.query : false;
-
+        if (schema.params) {
+            toValidate.params = req.params;
+        }
+        if (schema.body) {
+            toValidate.body = req.body;
+        }
+        if (schema.query) {
+            toValidate.query = req.query;
+        }
         function onValidationComplete(err: any, validated: any) {
             if (err) {
                 return next(Boom.badRequest(err.message, err.details));

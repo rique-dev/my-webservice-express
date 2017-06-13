@@ -1,10 +1,8 @@
 import * as Express from 'express';
 import CONFIG from './configuration';
 import { Middleware } from './configuration/middlewares';
-import requestTimeout from 'connect-timeout'; // No Types
 import MongoConnector from './components/mongoose';
 import API from './api';
-import { RequestTimeout } from './configuration/constant';
 
 // Creates and configures an ExpressJS web server.
 class Server {

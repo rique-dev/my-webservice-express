@@ -1,15 +1,15 @@
 import CONFIG from './../configuration';
-import Entity from './endpoint/Router';
-import * as Express from 'express';
+import ThingRouter from './thing/thing.routers';
+import * as express from 'express';
 
 class API {
     static get routes() {
-        const app = Express();
+        const app = express();
 
-        app.use(`${CONFIG.API_VERSION}/endpoint`, Entity.routers);
+        app.use(`${CONFIG.API_VERSION}/thing`, ThingRouter);
 
         return app;
     }
 }
 
-export default API;
+export default API.routes;

@@ -1,24 +1,23 @@
 import { Request, Response } from 'express';
-import { Model } from 'mongoose';
 
-import { IController, IModel } from './interfaces';
+import { IController } from './interfaces';
 
-export default abstract class Controller implements IController {
-    constructor(private entity: Model<IModel>) {
+import { Document } from 'mongoose';
+
+export default abstract class Controller {
+    public async list(req: Request, res: Response) {
+        return res.json('list');
     }
-    public list(req: Request, res: Response) {
-        res.json('list');
+    public async create(req: Request, res: Response) {
+        return res.json('create');
     }
-    public create(req: Request, res: Response) {
-        res.json('create');
+    public async read(req: Request, res: Response) {
+        return res.json('read');
     }
-    public read(req: Request, res: Response) {
-        res.json('read');
+    public async update(req: Request, res: Response) {
+        return res.json('update');
     }
-    public update(req: Request, res: Response) {
-        res.json('update');
-    }
-    public destroy(req: Request, res: Response) {
-        res.json('destroy');
+    public async destroy(req: Request, res: Response) {
+        return res.json('destroy');
     }
 }
