@@ -1,23 +1,26 @@
 import * as Joi from 'joi';
 import JoiObjectId from '../../../util/joi-object-id';
+import Validate from '../../../components/validate';
 
-export const create = {
-    body: Joi.object().keys({
-        name: Joi.string().required()
-    })
-};
+export default class Validator {
 
-export const params = {
-    params: Joi.object().keys({
-        id: JoiObjectId().required()
-    })
-};
+    static get create(): Object {
+        return {
+            body: Joi.object().keys({
+                name: Joi.string().required()
+            })
+        };
+    }
 
-export const update = {
-    body: Joi.object().keys({
-        id: JoiObjectId(),
-        name: Joi.string(),
-        createAt: Joi.date()
-    }),
-    params,
-};
+    static get params(): Object {
+        return {
+            params: Joi.object().keys({
+                id: JoiObjectId().required()
+            })
+        };
+    }
+
+    static get update(): Object {
+        return Object.assign(Validator.create, Validator.params);
+    }
+}

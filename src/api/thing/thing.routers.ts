@@ -7,9 +7,10 @@ import {
     list
 } from './thing.controller';
 import Validate from '../../components/validate';
-import * as Validator from './base/thing.validator';
+import Validator from './base/thing.validator';
 
 class ThingRouter {
+
     static get routers() {
         const router: Router = Router();
         router.get('/', list);

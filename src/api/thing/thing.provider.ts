@@ -1,5 +1,6 @@
 class Provider {
     private message: string;
+
     public show() {
         this.message = 'Provider';
     }
