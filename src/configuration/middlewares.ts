@@ -12,8 +12,10 @@ import * as cors from 'cors';
 import CONFIG from './index';
 import { ENV, RequestTimeout } from './constant';
 import API from './../api';
+import { APIDocsRouter } from './swagger';
 
 export class Middleware {
+
     static get configuration() {
         const app = Express();
         app.use(requestTimeout(RequestTimeout));
@@ -40,6 +42,9 @@ export class Middleware {
 
         app.use(API);
 
+        // Documentation
+        app.use(`${CONFIG.API_VERSION}/docs`, new APIDocsRouter().getRouter());
+
         app.use((err: any, req: Express.Request, res: Express.Response, next: Express.NextFunction) => {
             err.status = 404;
             next(err);
@@ -54,7 +59,6 @@ export class Middleware {
         if (CONFIG.NODE_ENV === ENV.DEVELOPMENT || CONFIG.NODE_ENV === ENV.TEST) {
             app.use(errorHandler());
         }
-
 
         app.get(CONFIG.API_VERSION, (req: Express.Request, res: Express.Response) => {
             res.sendFile(`${CONFIG.ROOT}/public/index.html`);

@@ -5,23 +5,22 @@ import CONFIG from './configuration';
 
 // debug('ts-express:server');
 
-const webService = createServer(Server);
-
-webService.on('error', onError);
-webService.on('listening', onListening);
+export const server = createServer(Server);
+server.listen(CONFIG.PORT);
+server.on('error', onError);
+server.on('listening', onListening);
 
 function onError(error: NodeJS.ErrnoException): void {
     if (error.syscall !== 'listen') {
         throw error;
     }
-    const bind = (typeof CONFIG.PORT === 'string') ? 'Pipe ' + CONFIG.PORT : 'PORT ' + CONFIG.PORT;
     switch (error.code) {
         case 'EACCES':
-            console.error(`${bind} requires elevated privileges`);
+            console.error(`PORT ${CONFIG.PORT} requires elevated privileges`);
             process.exit(1);
             break;
         case 'EADDRINUSE':
-            console.error(`${bind} is already in use`);
+            console.error(`PORT ${CONFIG.PORT} is already in use`);
             process.exit(1);
             break;
         default:
@@ -30,7 +29,5 @@ function onError(error: NodeJS.ErrnoException): void {
 }
 
 function onListening(): void {
-    const addr = webService.address();
-    const bind = (typeof addr === 'string') ? `pipe ${addr}` : `PORT ${addr.port}`;
-    // debug(`Listening on ${bind}`);
+    CONFIG.console();
 }

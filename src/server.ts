@@ -14,7 +14,6 @@ class Server {
         this.app = Express();
         this.MongoDB();
         this.Middleware();
-        this.Init();
     }
 
     // Configure API endpoints.
@@ -49,13 +48,6 @@ class Server {
         //             console.log(error);
         //         });
         // });
-    }
-
-    private Init() {
-        this.app
-            .listen(CONFIG.PORT, () => {
-                CONFIG.console();
-            });
     }
 }
 
