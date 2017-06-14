@@ -9,7 +9,3 @@ export interface Thing {
 export interface ThingDefinition extends SchemaDefinition { }
 
 export interface ThingDocument extends Document, Thing { }
-
-export interface Route {
-
-}

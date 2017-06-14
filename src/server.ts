@@ -1,8 +1,9 @@
 import * as Express from 'express';
 import CONFIG from './configuration';
 import { Middleware } from './configuration/middlewares';
-import MongoConnector from './components/mongoose';
+import DataAccess from './components/mongoose';
 import API from './api';
+import Model from './api/thing/base/thing.model';
 
 // Creates and configures an ExpressJS web server.
 class Server {
@@ -23,6 +24,22 @@ class Server {
     }
 
     private MongoDB() {
+        DataAccess.connect();
+        Model.find({})
+            .remove()
+            .then(() => {
+                Model.create({
+                    name: 'Frio'
+                }, {
+                        name: 'Free'
+                    }, {
+                        name: 'Quente'
+                    }, {
+                        name: 'Veg'
+                    }, {
+                        name: 'Fatia'
+                    });
+            });
         // const url: string = 'mongodb://localhost:27017/';
         // const options: string[];
         // const mongo = new MongoConnector;

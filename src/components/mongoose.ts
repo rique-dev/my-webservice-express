@@ -1,61 +1,19 @@
-import * as mongodb from 'mongodb';
+import * as Mongoose from 'mongoose';
+import CONFIG from './../configuration';
 
-export default class MongoConnector {
+export default class DataAccess {
+    static mongooseInstance: any;
+    static mongooseConnection: Mongoose.Connection;
 
-    private database: mongodb.Db;
-
-    constructor() {
-
-    }
-
-    public connect(url: string, options: string[]): Promise<string> {
-        if (this.database === undefined) {
-            console.log('database undefined, connecting...');
+    static connect() {
+        if (this.mongooseInstance) {
+            return this.mongooseInstance;
         }
-        return new Promise((resolve, reject) => {
-            mongodb.MongoClient.connect(url, options).then(
-                (response) => {
-                    this.database = response;
-                    resolve(response);
-                    if (this.database != undefined) {
-                        console.log('database connection created!');
-                    }
-                    this.database.on('close', () => {
-                        console.log('mongo closed!');
-                        process.exit(1);
-                    });
-                },
-                (error) => {
-                    reject(error);
-                }
-            ).catch((ex) => {
-                reject(ex);
-            });
+        this.mongooseConnection = Mongoose.connection;
+        this.mongooseConnection.once('open', () => {
+            console.log('Conectado ao mongodb.');
         });
-    }
-
-    private callMethod(fn: Promise<string>): Promise<string> {
-        return new Promise(
-            (resolve, reject) => {
-                fn.then(
-                    (data) => {
-                        resolve(data);
-                    },
-                    (error) => {
-                        reject(error);
-                    }
-                ).catch((error) => {
-                    console.log(error);
-                });
-            }
-        );
-    }
-
-    public getListOfDatabases(): Promise<string> {
-        return this.callMethod(this.database.admin().listDatabases());
-    }
-
-    public ping(): Promise<string> {
-        return this.callMethod(this.database.admin().ping());
+        this.mongooseInstance = Mongoose.connect(CONFIG.MONGO_URL);
+        return this.mongooseInstance;
     }
 }
