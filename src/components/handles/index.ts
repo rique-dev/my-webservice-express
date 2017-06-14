@@ -13,19 +13,26 @@ export const HttpInternalServerError = (res: Response, err?: string) => {
     return HttpResponse(res, payload);
 };
 
-export const HttpNotFound = (res: Response, modelString?: string) => {
-    if (!modelString) {
-        modelString = 'Item not found';
+export const HttpNotFound = (res: Response, message?: string) => {
+    if (!message) {
+        message = 'Item not found';
     }
-    const payload = Boom.notFound(modelString).output;
+    const payload = Boom.notFound(message).output;
     return HttpResponse(res, payload);
 };
 
-export const HttpBadRequest = (res: Response, itemExistString?: string, data?: any) => {
-    if (!itemExistString) {
-        itemExistString = 'Item exist';
+export const HttpBadRequest = (res: Response, message?: string, data?: any) => {
+    if (!message) {
+        message = 'Item not exist';
     }
-    const payload = Boom.badRequest(itemExistString, data).output;
+    const payload = Boom.badRequest(message, data).output;
     return HttpResponse(res, payload);
 };
 
+export const HttpNotImplemented = (res: Response, message?: string, data?: any) => {
+    if (!message) {
+        message = '';
+    }
+    const payload = Boom.notImplemented(message, data).output;
+    return HttpResponse(res, payload);
+};
