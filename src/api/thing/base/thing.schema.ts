@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { ThingDefinition, Thing } from './thing';
+import { Thing } from './thing';
 
 class ThingSchema {
 

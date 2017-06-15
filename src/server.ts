@@ -27,9 +27,10 @@ class Server {
         Model.find({})
             .remove()
             .then(() => {
-                Model.create({
-                    name: 'Frio'
-                }, {
+                Model.create(
+                    {
+                        name: 'Frio'
+                    }, {
                         name: 'Free'
                     }, {
                         name: 'Quente'
@@ -37,7 +38,8 @@ class Server {
                         name: 'Veg'
                     }, {
                         name: 'Fatia'
-                    });
+                    }
+                );
             });
         // const url: string = 'mongodb://localhost:27017/';
         // const options: string[];

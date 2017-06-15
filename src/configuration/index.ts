@@ -1,7 +1,7 @@
 import * as path from 'path';
 import { ENV, PORT } from './constant';
 
-class Configuration {
+export class Configuration {
     public NODE_ENV: ENV;
     public PORT: PORT;
     public ROOT: string = path.normalize(`${__dirname}/..`);

@@ -1,11 +1,11 @@
 import * as Boom from 'boom';
 import { Response } from 'express';
 
-const HttpResponse = (res: Response, payload: Boom.Output) => {
+const HttpResponse = (res: Response, payload: Boom.Output): Response => {
     return res.status(payload.statusCode).json(payload);
 };
 
-export const HttpInternalServerError = (res: Response, err?: string) => {
+export const HttpInternalServerError = (res: Response, err?: string): Response => {
     if (!err) {
         err = 'An internal server error occurred';
     }
@@ -13,7 +13,7 @@ export const HttpInternalServerError = (res: Response, err?: string) => {
     return HttpResponse(res, payload);
 };
 
-export const HttpNotFound = (res: Response, message?: string) => {
+export const HttpNotFound = (res: Response, message?: string): Response => {
     if (!message) {
         message = 'Item not found';
     }
@@ -21,7 +21,7 @@ export const HttpNotFound = (res: Response, message?: string) => {
     return HttpResponse(res, payload);
 };
 
-export const HttpBadRequest = (res: Response, message?: string, data?: any) => {
+export const HttpBadRequest = (res: Response, message?: string, data?: any): Response => {
     if (!message) {
         message = 'Item not exist';
     }
@@ -29,7 +29,7 @@ export const HttpBadRequest = (res: Response, message?: string, data?: any) => {
     return HttpResponse(res, payload);
 };
 
-export const HttpNotImplemented = (res: Response, message?: string, data?: any) => {
+export const HttpNotImplemented = (res: Response, message?: string, data?: any): Response => {
     if (!message) {
         message = '';
     }

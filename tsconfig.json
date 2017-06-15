@@ -1,16 +1,17 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "target": "es2017",
+        "target": "es5",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "noImplicitAny": true,
         "removeComments": true,
         "moduleResolution": "node",
-        "sourceMap": false,
+        "sourceMap": true,
         "typeRoots": ["node_modules/@types"],
         "outDir": "dist",
         "baseUrl": ".",
+        "declaration": true,
         "paths": {
             "*": [
                 "node_modules/*",

@@ -1,31 +1,18 @@
-function fun() {
-    return new Promise((resolve, reject) => {
-        resolve(true);
-        // throw new Error('asdasd');
-    });
+class a {
+    constructor(c) {
+        this.b = c;
+    }
+    show() {
+        console.log(this.b);
+    }
 }
 
-const a = async() => {
-    try {
-        const f = await fun();
-        return Promise.resolve(`try ${f}`);
-    } catch (error) {
-        throw error;
+class b extends a {
+    show2(){
+        console.log(this.b);
     }
 }
-async function b() {
-    try {
-        const c = await a();
-        return Promise.resolve(c);
-    } catch (error) {
-        return Promise.resolve(error);
-    }
-}
-async function v() {
-    try {
-        console.log(await b())
-    } catch (error) {
-        console.log(error);
-    }
-}
-v();
+
+const c = new b('asd');
+c.show();
+c.show2();

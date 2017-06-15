@@ -1,4 +1,6 @@
 dist/
 node_modules/
 log/
+bin/
 .tmp/
+test.js

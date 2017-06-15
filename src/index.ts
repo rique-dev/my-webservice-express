@@ -1,14 +1,14 @@
-import { createServer } from 'http';
+import { createServer, Server } from 'http';
 // import debug from 'debug';
-import Server from './server';
+import server from './server';
 import CONFIG from './configuration';
 
 // debug('ts-express:server');
 
-export const server = createServer(Server);
-server.listen(CONFIG.PORT);
-server.on('error', onError);
-server.on('listening', onListening);
+const httpServer: Server = createServer(server);
+httpServer.listen(CONFIG.PORT);
+httpServer.on('error', onError);
+httpServer.on('listening', onListening);
 
 function onError(error: NodeJS.ErrnoException): void {
     if (error.syscall !== 'listen') {
@@ -31,3 +31,4 @@ function onError(error: NodeJS.ErrnoException): void {
 function onListening(): void {
     CONFIG.console();
 }
+export default httpServer;

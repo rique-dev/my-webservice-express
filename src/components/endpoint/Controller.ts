@@ -1,23 +1,93 @@
 import { Request, Response } from 'express';
+import { IController } from './Interfaces';
+import { Document, Model } from 'mongoose';
+import DocumentDao from './Dao';
+import { HttpInternalServerError, HttpNotFound, HttpBadRequest } from '../handles';
+import { Entity } from './endpoint';
 
-import { IController } from './interfaces';
+let Dao: DocumentDao;
+export default class Controller {
+    constructor(public documentDao: DocumentDao) {
+        Dao = documentDao;
+    }
 
-import { Document } from 'mongoose';
+    public async list(req: Request, res: Response): Promise<Response> {
+        let documents: Document[];
+        try {
+            documents = await Dao.list();
+            if (!documents) {
+                return HttpNotFound(res);
+            }
+        } catch (err) {
+            console.log('ERR', err);
+            return HttpInternalServerError(res, err);
+        }
 
-export default abstract class Controller {
-    public async list(req: Request, res: Response) {
-        return res.json('list');
+        return res.json(documents);
     }
-    public async create(req: Request, res: Response) {
-        return res.json('create');
+
+    public async create(req: Request, res: Response): Promise<Response> {
+        const data: Entity = req.body;
+        let document: Document;
+
+        try {
+            document = await Dao.create(data);
+            if (!document) {
+                return HttpBadRequest(res);
+            }
+        } catch (err) {
+            return HttpInternalServerError(res, err);
+        }
+
+        return res.status(201).json(document);
     }
-    public async read(req: Request, res: Response) {
-        return res.json('read');
+
+    public async read(req: Request, res: Response): Promise<Response> {
+        const id = req.params.id;
+        let document: Document;
+
+        try {
+            document = await Dao.read(id);
+            if (!document) {
+                return HttpNotFound(res);
+            }
+        } catch (err) {
+            return HttpInternalServerError(res, err);
+        }
+
+        return res.json(document);
     }
-    public async update(req: Request, res: Response) {
-        return res.json('update');
+
+    public async update(req: Request, res: Response): Promise<Response> {
+        const id = req.params.id;
+        const data: Entity = req.body;
+        let document: Document;
+
+        try {
+            document = await Dao.update(id, data);
+            if (!document) {
+                return HttpNotFound(res);
+            }
+        } catch (err) {
+            return HttpInternalServerError(res, err);
+        }
+
+        return res.json(document);
     }
-    public async destroy(req: Request, res: Response) {
-        return res.json('destroy');
+
+    public async destroy(req: Request, res: Response): Promise<Response> {
+        const id = req.params.id;
+        let document: Document;
+
+        try {
+            document = await Dao.destroy(id);
+            if (!document) {
+                return HttpNotFound(res);
+            }
+        } catch (err) {
+            return HttpInternalServerError(res, err);
+        }
+
+        return res.json(document);
     }
 }

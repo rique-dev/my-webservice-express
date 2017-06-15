@@ -2,8 +2,8 @@ import CONFIG from './../configuration';
 import ThingRouter from './thing/thing.routers';
 import * as express from 'express';
 
-class API {
-    static get routes() {
+export class API {
+    static get routes(): Express.Application {
         const app = express();
 
         app.use(`${CONFIG.API_VERSION}/thing`, ThingRouter);

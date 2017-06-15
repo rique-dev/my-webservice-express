@@ -1,49 +1,19 @@
 import * as Mongoose from 'mongoose';
-import CONFIG from './index';
+import CONFIG from './../configuration';
 
-enum ConnectionState {
-    ALIVE,
-    DEAD
-}
+export default class DataAccess {
+    static mongooseInstance: any;
+    static mongooseConnection: Mongoose.Connection;
 
-interface DB {
-    connect(): any;
-    status(): ConnectionState;
-}
-
-class Mongo implements DB {
-
-    constructor(private connectionString: string) {
-    }
-
-    connect(): any {
-    Mongoose.connect(this.connectionString, err => {
-        if (err) {
-                console.log('Could not connect to Mongo!!');
-                console.log(err.name);
-                console.log(err.message);
-            }
-        });
-    }
-
-    status(): ConnectionState {
-        const connections = Mongoose.connections;
-        if (!connections) {
-            return ConnectionState.DEAD;
-        } else {
-            for (let i = 0; i < connections.length; i++) {
-                const connection = connections[i];
-                if (!connection.host ||
-                    !connection.port ||
-                    !connection.name ||
-                    connection._readyState === 0) {
-                    return ConnectionState.DEAD;
-                }
-            }
-
-            return ConnectionState.ALIVE;
+    static connect(): Mongoose.Collection {
+        if (this.mongooseInstance) {
+            return this.mongooseInstance;
         }
+        this.mongooseConnection = Mongoose.connection;
+        this.mongooseConnection.once('open', () => {
+            console.log('Conectado ao mongodb.');
+        });
+        this.mongooseInstance = Mongoose.connect(CONFIG.MONGO_URL);
+        return this.mongooseInstance;
     }
 }
-
-export default new Mongo(CONFIG.MONGO_URL).connect();

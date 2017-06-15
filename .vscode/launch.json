@@ -1,18 +1,17 @@
+// Use IntelliSense to learn about possible Node.js debug attributes.
+// Hover to view descriptions of existing attributes.
+// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
 {
-    // Use IntelliSense to learn about possible Node.js debug attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [{
-        "type": "node",
+        "name": "launch as server",
+        "type": "node2",
         "request": "launch",
-        "name": "Debug",
-        "program": "${workspaceRoot}/dist/server.js",
-        "smartStep": true,
-        "outFiles": [
-            "../dist/**/*.js"
-        ],
-        "preLaunchTask": "build",
-        "protocol": "inspector"
+        "cwd": "${workspaceRoot}",
+        "program": "${workspaceRoot}/dist/index.js",
+        "stopOnEntry": false,
+        "args": ["--server=4712"],
+        "sourceMaps": true,
+        "outDir": "${workspaceRoot}/dist"
     }]
 }

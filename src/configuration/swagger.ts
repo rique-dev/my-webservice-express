@@ -1,5 +1,5 @@
 import { Router, Response } from 'express';
-import swaggerJSDoc from 'swagger-jsdoc';
+const swaggerJSDoc = require('swagger-jsdoc');
 import { readdirSync, statSync } from 'fs';
 import { resolve, join } from 'path';
 
@@ -20,7 +20,7 @@ export class APIDocsRouter {
 
             const urls: string[] = [];
 
-            APIDocsRouter.getAllRoutes(resolve(__dirname), urls);
+            // APIDocsRouter.getAllRoutes(resolve(__dirname), urls);
 
             const options: {} = {
                 apis: urls,
@@ -40,29 +40,29 @@ export class APIDocsRouter {
         return this.router;
     }
 
-    private static getAllRoutes(dir: string, filelist: Array<string>): Array<string> {
+    // private static getAllRoutes(dir: string, filelist: Array<string>): Array<string> {
 
-        const _files = readdirSync(dir);
-        filelist = filelist || [];
+    //     const _files = readdirSync(dir);
+    //     filelist = filelist || [];
 
-        _files
-            .map(function (file) {
+    //     _files
+    //         .map(function (file) {
 
-                // filter out .map and hidden files
-                if (file.search('.map') < 0 && file.search(/^\./) < 0) {
+    //             // filter out .map and hidden files
+    //             if (file.search('.map') < 0 && file.search(/^\./) < 0) {
 
-                    if (statSync(join(dir, file)).isDirectory()) {
-                        filelist = APIDocsRouter.getAllRoutes(join(dir, file), filelist);
-                    }
-                    else {
+    //                 if (statSync(join(dir, file)).isDirectory()) {
+    //                     filelist = APIDocsRouter.getAllRoutes(join(dir, file), filelist);
+    //                 }
+    //                 else {
 
-                        if (file.search('.ts') > 0) {
-                            filelist.push(join(dir, file));
-                        }
-                    }
-                }
-            });
+    //                     if (file.search('.ts') > 0) {
+    //                         filelist.push(join(dir, file));
+    //                     }
+    //                 }
+    //             }
+    //         });
 
-        return filelist;
-    }
+    //     return filelist;
+    // }
 }
