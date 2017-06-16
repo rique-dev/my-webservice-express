@@ -1,18 +1,11 @@
-class a {
-    constructor(c) {
-        this.b = c;
+function a(entity) {
+    if (!entity) {
+        entity = {};
     }
-    show() {
-        console.log(this.b);
-    }
+    const _entity = {
+        a: 'a'
+    };
+    return Object.assign(_entity, entity);
 }
 
-class b extends a {
-    show2(){
-        console.log(this.b);
-    }
-}
-
-const c = new b('asd');
-c.show();
-c.show2();
+console.log(a({b:'b'}));

@@ -1,5 +1,6 @@
-import { Model, model } from 'mongoose';
-import { ThingDocument } from './thing';
-import ThingSchema from './thing.schema';
+import { Model, Document } from 'mongoose';
+import EntityModel from '../../../components/endpoint/Model';
 
-export default model<ThingDocument>('Thing', ThingSchema);
+export class ThingModel extends EntityModel { }
+
+export default new ThingModel('Thing').model;
