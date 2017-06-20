@@ -32,7 +32,7 @@ export class AuthService {
             .use(async (req: Request, res: Response, next: NextFunction): Promise<any> => {
                 let user: UserDocument = req.user;
                 try {
-                    user = await UserModel.findById(user._id).exec();
+                    user = <UserDocument>await UserModel.findById(user._id).exec();
                     if (user) {
                         return HttpUnauthorized(res);
                     }

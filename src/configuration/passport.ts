@@ -1,10 +1,10 @@
 import * as passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import { UserModel } from './../api/user/user.model';
+import UserEntityModel, { UserModel } from './../api/user/user.model';
 import { UserDocument } from './../api/user/user';
 
 function localAuthenticate(User: UserModel, email: string, password: string, done: Function) {
-    User.findOne({
+    UserEntityModel.findOne({
         email: email.toLowerCase()
     })
         .exec()

@@ -22,6 +22,13 @@ export class Configuration {
         return ['user', 'admin'];
     }
 
+    public get ROLE_USER(): string {
+        return this.USER_ROLES[0];
+    }
+    public get ROLE_ADMIN(): string {
+        return this.USER_ROLES[1];
+    }
+
     public get PORT(): number {
         if (this.NODE_ENV === CONST.ENV.TEST) {
             return CONST.PORT.TEST;

@@ -1,6 +1,6 @@
+import CONFIG from './index';
 export const RequestTimeout = '5s';
 
-export const userRoles = ['user', 'admin'];
 export class Constants {
     static TESTE: string = 'Test';
 }

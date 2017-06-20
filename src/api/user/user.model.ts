@@ -1,9 +1,15 @@
 import { Model, Document } from 'mongoose';
 import EntityModel from './../../components/endpoint/Model';
-import { UserDefinition, ROLE, User } from './user';
+import { UserDefinition, User } from './user';
+import CONFIG from '../../configuration';
 import * as crypto from 'crypto';
 
-export class UserModel extends Model {
+export class UserModel extends EntityModel {
+
+    constructor(public modelName: string) {
+        super(modelName);
+        this.schema.methods.validPassword = this.validPassword;
+    }
 
     public struct(): UserDefinition {
         const user: UserDefinition = {
@@ -20,7 +26,7 @@ export class UserModel extends Model {
             isDeleted: Boolean,
             role: {
                 type: String,
-                default: ROLE.USER
+                default: CONFIG.ROLE_USER
             },
             facebook: {
                 id: String,
@@ -36,9 +42,6 @@ export class UserModel extends Model {
             }
         };
         return super.struct(user);
-    }
-    public onInit() {
-        this.schema.method();
     }
     private get validPassword(): Function {
         return function (password: string) {
