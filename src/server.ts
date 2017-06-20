@@ -3,7 +3,7 @@ import CONFIG from './configuration';
 import { Middleware } from './configuration/middlewares';
 import DataAccess from './components/mongoose';
 import API from './api';
-import Model from './api/thing/base/thing.model';
+import { mock } from './util/seed.mock';
 
 // Creates and configures an ExpressJS web server.
 class Server {
@@ -13,7 +13,7 @@ class Server {
     // Run configuration methods on the Express instance.
     constructor() {
         this.app = Express();
-        this.MongoDB();
+        this.Database();
         this.Middleware();
     }
 
@@ -22,25 +22,9 @@ class Server {
         this.app.use(Middleware.configuration);
     }
 
-    private MongoDB() {
+    private Database() {
         DataAccess.connect();
-        Model.find({})
-            .remove()
-            .then(() => {
-                Model.create(
-                    {
-                        name: 'Frio'
-                    }, {
-                        name: 'Free'
-                    }, {
-                        name: 'Quente'
-                    }, {
-                        name: 'Veg'
-                    }, {
-                        name: 'Fatia'
-                    }
-                );
-            });
+        mock();
         // const url: string = 'mongodb://localhost:27017/';
         // const options: string[];
         // const mongo = new MongoConnector;

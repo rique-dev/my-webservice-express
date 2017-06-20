@@ -1,5 +1,5 @@
 import * as Joi from 'joi';
-import JoiObjectId from '../../../util/joi-object-id';
+import JoiObjectId from '../../../util/joi.object.id';
 import Validate from '../../../components/validate';
 
 export default class Validator {

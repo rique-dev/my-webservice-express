@@ -1,11 +1,11 @@
-class Provider {
+class Service {
     private message: string;
 
     public show() {
-        this.message = 'Provider';
+        this.message = 'Service';
     }
 }
 
 export const {
     show,
-} = new Provider();
+} = new Service();

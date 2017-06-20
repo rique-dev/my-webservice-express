@@ -1,6 +1,7 @@
 import { Model, model, Schema, SchemaDefinition, Document } from 'mongoose';
 import { Entity } from './endpoint';
-export default class EntityModel {
+
+export default abstract class EntityModel {
     constructor(public modelName: string, public schema?: Schema) {
         this.schema = schema ? schema : new Schema;
         this.modelName = modelName;
@@ -11,11 +12,7 @@ export default class EntityModel {
     public get model(): Model<Document> {
         return model<Document>(this.modelName, this.schema);
     }
-
-    private onInit() {
-        return;
-    }
-    private struct(entity?: SchemaDefinition): SchemaDefinition {
+    public struct(entity?: SchemaDefinition): SchemaDefinition {
         if (!entity) {
             entity = {};
         }
@@ -28,6 +25,7 @@ export default class EntityModel {
 
         return Object.assign(_entity, entity);
     }
+    abstract onInit(): void;
     private preSave() {
         function save(next: any) {
             const thing: Entity = this;

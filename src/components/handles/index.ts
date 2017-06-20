@@ -36,3 +36,20 @@ export const HttpNotImplemented = (res: Response, message?: string, data?: any):
     const payload = Boom.notImplemented(message, data).output;
     return HttpResponse(res, payload);
 };
+
+
+export const HttpUnauthorized = (res: Response, message?: string, data?: any): Response => {
+    if (!message) {
+        message = '';
+    }
+    const payload = Boom.unauthorized(message, data).output;
+    return HttpResponse(res, payload);
+};
+
+export const HttpForbidden = (res: Response, message?: string, data?: any): Response => {
+    if (!message) {
+        message = '';
+    }
+    const payload = Boom.forbidden(message, data).output;
+    return HttpResponse(res, payload);
+};
