@@ -31,7 +31,8 @@ module.exports = {
     plugins: [
         new webpack.DefinePlugin({
             'typeof window': '\"object\"',
-            'window': 'global'
+            'window': 'global',
+            '\"node_modules\/muri\/lib\"': '__dirname'
         }),
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.optimize.DedupePlugin(),
