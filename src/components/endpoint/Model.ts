@@ -7,6 +7,7 @@ export default class EntityModel {
         this.modelName = modelName;
         this.schema.add(this.struct());
         this.schema.pre('save', this.preSave());
+        this.schema.pre('findOneAndUpdate', this.preFindOneAndUpdate());
     }
     public get model(): Model<Document> {
         return model<Document>(this.modelName, this.schema);
@@ -23,6 +24,13 @@ export default class EntityModel {
         };
 
         return Object.assign(_entity, entity);
+    }
+    private preFindOneAndUpdate() {
+        function update(next: any) {
+            this.update({}, { $set: { updatedAt: new Date() } });
+            next();
+        }
+        return update;
     }
     private preSave() {
         function save(next: any) {

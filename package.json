@@ -5,14 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && npm run watch",
-    "build": "npm run build-ts && npm run tslint",
     "serve": "node dist/server.js",
     "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run watch-ts\" \"nodemon dist\"",
     "test": "jest --forceExit",
     "build-ts": "tsc",
     "watch-ts": "tsc -w",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
-    "copy-static": "node copyStatic.js"
+    "build": "npm run build-ts && npm run tslint && npm run build:script",
+    "build:script": "node scripts/build"
   },
   "author": "HenryQRM",
   "license": "MIT",
@@ -41,6 +41,7 @@
     "morgan": "^1.8.2",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    "replace-bundle-webpack-plugin": "^1.0.0",
     "response-time": "^2.3.2",
     "swagger-jsdoc": "^1.9.4",
     "winston": "^2.3.1"

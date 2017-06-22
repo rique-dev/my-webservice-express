@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const OptimizeJsPlugin = require("optimize-js-plugin");
 const UglifyEsPlugin = require('uglify-es-webpack-plugin');
+const ReplacePlugin = require('replace-bundle-webpack-plugin');
 
 module.exports = {
     entry: "./dist/index.js",
@@ -33,6 +34,12 @@ module.exports = {
             'typeof window': '\"object\"',
             'window': 'global'
         }),
+        new ReplacePlugin([{
+            partten: '\"node_modules/muri/lib\"',
+            replacement: () => {
+                return '__dirname';
+            }
+        }]),
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.optimize.DedupePlugin(),
         new webpack.optimize.AggressiveMergingPlugin(),

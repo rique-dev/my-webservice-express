@@ -2,11 +2,11 @@
     "apps": [{
         "exec_mode": "cluster",
         "instances": 4,
-        "script": "./build/src/index.js",
+        "script": "./server/index.js",
         "name": "type-node",
         "interpreter": "node",
         "env": {
-            "NODE_ENV": "dev"
+            "NODE_ENV": "PRODUCTION"
         }
     }]
 }
