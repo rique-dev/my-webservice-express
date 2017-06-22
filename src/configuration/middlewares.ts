@@ -1,7 +1,6 @@
 import * as morgan from 'morgan';
 import * as bodyParser from 'body-parser';
 import * as path from 'path';
-// import * as errorHandler from 'errorhandler';
 import * as compression from 'compression';
 import * as helmet from 'helmet';
 import * as methodOverride from 'method-override';
@@ -53,10 +52,6 @@ export class Middleware {
             }
             next();
         });
-
-        // if (CONFIG.NODE_ENV === ENV.DEVELOPMENT || CONFIG.NODE_ENV === ENV.TEST) {
-        //     app.use(errorHandler());
-        // }
 
         app.get(CONFIG.API_VERSION, (req: Express.Request, res: Express.Response) => {
             res.sendFile(`${CONFIG.ROOT}/public/index.html`);

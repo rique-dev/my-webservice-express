@@ -6,6 +6,7 @@ export default class DataAccess {
     static mongooseConnection: Mongoose.Connection;
 
     static connect(): Mongoose.Collection {
+        const options = { promiseLibrary: global.Promise };
         if (this.mongooseInstance) {
             return this.mongooseInstance;
         }
@@ -13,7 +14,7 @@ export default class DataAccess {
         this.mongooseConnection.once('open', () => {
             console.log('Conectado ao mongodb.');
         });
-        this.mongooseInstance = Mongoose.connect(CONFIG.MONGO_URL);
+        this.mongooseInstance = Mongoose.connect(CONFIG.MONGO_URL, options);
         return this.mongooseInstance;
     }
 }

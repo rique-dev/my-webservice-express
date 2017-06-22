@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { IController } from './Interfaces';
 import { Document, Model } from 'mongoose';
 import DocumentDao from './Dao';
 import { HttpInternalServerError, HttpNotFound, HttpBadRequest } from '../handles';

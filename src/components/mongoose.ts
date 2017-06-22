@@ -6,6 +6,7 @@ export default class DataAccess {
     static mongooseConnection: Mongoose.Connection;
 
     static connect() {
+        (<any>Mongoose).Promise = global.Promise; // Replace mpromise
         if (this.mongooseInstance) {
             return this.mongooseInstance;
         }
